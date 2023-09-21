@@ -130,8 +130,9 @@
           <div class="flex-container">
             
             <button class="btn btn-ghost">
-              <a href='/jobs/postjob'>
-                Post Job
+              <a href='/img/new'> 
+                <!-- Change this to only the logged in person can upload image -->
+                Upload Image
               </a>
             </button>
     

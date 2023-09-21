@@ -1,34 +1,41 @@
-<!-- <script>
-    export let data;
-    
-  </script>
+<script>
+	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
+  import { getTokenFromLocalStorage } from '../utils/auth.js';
+
+
+  export let data;
+
   
-  <h1 class="text-center text-xl font-bold">Find Your Next Job</h1>
-  
-  <div class="overflow-x-auto w-full">
-    {#each data.jobs as job}
-        <div class="flex flex-col mt-10">
+</script>
+
+<body class="min-h-screen flex items-center justify-center">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10 mx-auto pt-20 pb-10" style="max-width: 1200px;">
+    {#each data.images as image}
+      <div class="card hover:transition delay-150 hover:-translate-y-10 shadow-xl shadow-sky-200 hover:shadow-indigo-600 flex flex-col">
+        <figure style="height: 300px;" class="relative">
+          <img src={image.url} alt="" class="w-full h-full object-cover transition-transform duration-300 transform hover:scale-110" />
+        </figure>
+        <div class="card-body bg-gradient-to-rrounded-b-2xl p-4">
+          <div class="flex flex-col justify-between h-full">
             <div>
-                <a class="font-bold text-2xl" href="/jobs/{job.id}">{job.title}</a>
-                <div class="text-sm mt-1">
-                    {job.employer} . {job.location} .
-                    <span class="text-sm">USD {formatNumber(job.minAnnualCompensation)} - USD {humanize.formatNumber(
-                            job.maxAnnualCompensation
-                        )}</span>
-                </div>
-                <div class="italic text-xs opacity-50 mt-2">
-                   posted {new Date(job.created).toLocaleDateString(undefined, {
-                        weekday: 'long',
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                   })}
+              <h2 class="card-title text-lg font-bold mb-2">{image.title}</h2>
+              <p class="mb-4">{image.description}</p>
+            </div>
+            <div class="mt-auto">
+              <p class="">${image.price / 100} USD</p>
+              <div class="card-actions justify-end mt-4">
+                <a href="/img/{image.id}">
+                  <button class="btn btn-primary hover:animate-pulse hover:btn-secondary">
+                    View
+                  </button>
+                </a>
               </div>
             </div>
-  
-            <div class="mt-4 ">
-                {job.description.slice(0, 240)}...
-            </div>
+          </div>
         </div>
+      </div>
     {/each}
-  </div> -->
+  </div>
+</body>
+
+

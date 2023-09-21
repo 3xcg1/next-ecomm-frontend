@@ -31,40 +31,43 @@ export function getTokenFromLocalStorage() {
 }
 
 export async function isLoggedIn() {
-  if (!getTokenFromLocalStorage()) {
-    return false
+  if (!(getTokenFromLocalStorage())) {
+    isLogged.set(false);
   }
-
-  try {
-    const resp = await fetch(
-      PUBLIC_BACKEND_BASE_URL + '/auth',// 
-      {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': getTokenFromLocalStorage()
-        },
-      }
-    );
-
-    const res = await resp.json()
-    if (resp.status == 200) {
-
-      localStorage.setItem("auth", JSON.stringify({
-        "accessToken": res.accessToken,
-        "userId": res.record.id
-      }));
-
-      isLogged.set(true);
-      return true
-    }
-
-    return false
-  } catch {
-    return false
-  }
+  else 
+    isLogged.set(true);
 }
+
+  // try {
+  //   const resp = await fetch(
+  //     PUBLIC_BACKEND_BASE_URL + '/auth',// 
+  //     {
+  //       method: 'POST',
+  //       mode: 'cors',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': getTokenFromLocalStorage()
+  //       },
+  //     }
+  //   ); this no need, old one use auth refresh
+
+//     const res = await resp.json()
+//     if (resp.status == 200) {
+
+//       localStorage.setItem("auth", JSON.stringify({
+//         "accessToken": res.accessToken,
+//         "userId": res.record.id
+//       }));
+
+//       isLogged.set(true);
+//       return true
+//     }
+
+//     return false
+//   } catch {
+//     return false
+//   }
+// }
 
 //Check credential 
 export async function authenticateUser(email, password) {
